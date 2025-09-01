@@ -1,3 +1,4 @@
 tsconfig.explain.json
 node_modules
 .env
+database/app.db
