@@ -4,7 +4,7 @@
   "description": "- [ ] Criar usuário - [ ] Identificar usuário entre requisições - [ ] Registrar refeição - [ ] Editar refeição - [ ] Apagar refeição - [ ] Listar todas as refeições de um usuário - [ ] Visualizar uma refeição - [ ] Recuperar métricas do usuário   - [ ] Quantidade total de refeições   - [ ] Refeições dentro da dieta   - [ ] Refeições fora da dieta   - [ ] Melhor sequência dentro da dieta",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx src/server.ts",
+    "dev": "tsx --watch src/server.ts",
     "knex": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js"
   },
   "keywords": [],
@@ -19,6 +19,8 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "dotenv": "^17.2.1",
     "fastify": "^5.5.0",
     "jsonwebtoken": "^9.0.2",
