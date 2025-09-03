@@ -15,8 +15,8 @@ O projeto está atualmente **em andamento**, recebendo novas funcionalidades e m
 
 # RF (Requisitos Funcionais)
 
-- [ ] Criar usuário
-- [ ] Identificar usuário entre requisições
+- [x] Criar usuário
+- [x] Identificar usuário entre requisições
 - [ ] Registrar refeição
 - [ ] Editar refeição
 - [ ] Apagar refeição
@@ -38,3 +38,34 @@ O projeto está atualmente **em andamento**, recebendo novas funcionalidades e m
 - [ ] Persistência em banco de dados
 - [ ] API REST com respostas padronizadas
 - [ ] Testes automatizados
+
+
+# Rotas 🚧 (em andamento)
+
+## 1️⃣ Usuários (/users)
+| Método | Rota       | Descrição                        |
+|--------|------------|----------------------------------|
+| POST   | /users     | Criar novo usuário (signup)      |
+| GET    | /users/:id | Obter dados de um usuário por ID |
+| PUT    | /users/:id | Atualizar dados de um usuário    |
+| DELETE | /users/:id | Deletar usuário                  |
+
+## 2️⃣ Autenticação (/auth)
+| Método | Rota        | Descrição                          |
+|--------|-------------|------------------------------------|
+| POST   | /auth/login | Autenticar usuário (retorna token) |
+| POST   | /auth/logout | Encerrar sessão (opcional)        |
+
+## 3️⃣ Refeições (/meals)
+| Método | Rota        | Descrição                             |
+|--------|-------------|---------------------------------------|
+| POST   | /meals      | Criar nova refeição                   |
+| GET    | /meals/:id  | Obter refeição específica             |
+| GET    | /meals      | Listar todas as refeições do usuário  |
+| PUT    | /meals/:id  | Atualizar uma refeição                |
+| DELETE | /meals/:id  | Deletar uma refeição                  |
+
+## 4️⃣ Estatísticas (/stats)
+| Método | Rota   | Descrição                                                      |
+|--------|--------|----------------------------------------------------------------|
+| GET    | /stats | Retorna estatísticas do usuário (sequência, dentro/fora dieta) |
