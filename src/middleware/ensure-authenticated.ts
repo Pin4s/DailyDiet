@@ -10,7 +10,6 @@ interface TokenPayload {
 async function ensureAuthenticated(request: FastifyRequest, reply: FastifyReply) {
     try {
         const authHeader = request.headers.authorization
-        console.log("Entrou no ensure")
 
         if (!authHeader) {
             return reply.status(401).send({ message: "JWT Token not found" })
