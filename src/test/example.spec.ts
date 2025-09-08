@@ -16,5 +16,16 @@ afterAll(async () => {
     await app.close()
 })
 
-
+describe('Users Routes', () => {
+    test('should be able to create a new user', async () => {
+        await request(app.server)
+            .post('/users')
+            .send({
+                name: "Test User",
+                email: "test@email.com",
+                password: "123456",
+            })
+            .expect(201)
+    })
+})
 
