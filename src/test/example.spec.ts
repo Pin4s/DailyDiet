@@ -29,3 +29,28 @@ describe('Users Routes', () => {
     })
 })
 
+describe('Auth Routes', async () => {
+    test('Should be able to create a new session', async () => {
+        await request(app.server)
+            .post('/users')
+            .send({
+                name: "Login User",
+                email: "login@email.com",
+                password: "password123",
+            })
+            .expect(201)
+
+        const authResponse = await request(app.server)
+            .post('/auth/login')
+            .send({
+                email: "login@email.com",
+                password: "password123"
+            }).expect(200)
+
+        expect(authResponse.body).toEqual(
+            expect.objectContaining({
+                token: expect.any(String)
+            })
+        )
+    })
+})
