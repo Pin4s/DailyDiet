@@ -17,27 +17,27 @@ O projeto está atualmente **em andamento**, recebendo novas funcionalidades e m
 
 - [x] Criar usuário
 - [x] Identificar usuário entre requisições
-- [ ] Registrar refeição
-- [ ] Editar refeição
-- [ ] Apagar refeição
-- [ ] Listar todas as refeições de um usuário
-- [ ] Visualizar uma refeição
-- [ ] Recuperar métricas do usuário
-  - [ ] Quantidade total de refeições
-  - [ ] Refeições dentro da dieta
-  - [ ] Refeições fora da dieta
-  - [ ] Melhor sequência dentro da dieta
+- [x] Registrar refeição
+- [x] Editar refeição
+- [x] Apagar refeição
+- [x] Listar todas as refeições de um usuário
+- [x] Visualizar uma refeição
+- [x] Recuperar métricas do usuário
+  - [x] Quantidade total de refeições
+  - [x] Refeições dentro da dieta
+  - [x] Refeições fora da dieta
+  - [x] Melhor sequência dentro da dieta
 
 # RN (Regras de Negócio)
 
-- [ ] Refeições devem estar vinculadas a um usuário
-- [ ] Usuário só pode visualizar, editar e apagar suas próprias refeições
+- Refeições devem estar vinculadas a um usuário
+- Usuário só pode visualizar, editar e apagar suas próprias refeições
 
 # RNF (Requisitos Não Funcionais) — opcional
 
-- [ ] Persistência em banco de dados
-- [ ] API REST com respostas padronizadas
-- [ ] Testes automatizados
+- [x] Persistência em banco de dados
+- [x] API REST com respostas padronizadas
+- [x] Testes automatizados
 
 
 # Rotas 🚧 (em andamento)
