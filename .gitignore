@@ -1,4 +1,5 @@
 tsconfig.explain.json
 node_modules
 .env
+.env.test
 database/app.db

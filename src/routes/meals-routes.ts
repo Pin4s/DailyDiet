@@ -51,9 +51,15 @@ export async function mealsRoutes(app: FastifyInstance) {
             return reply.status(500).send({ message: 'User ID not found in request.' })
         }
 
-        const index = await knex('meals').select('*').where({ user_id: userId })
+        const meals = await knex('meals')
+        .select('*').where({ user_id: userId })
 
-        return reply.send({ Meals: index })
+        const transformedMeal = meals.map(meal => ({
+            ...meal,
+            is_on_diet: meal.is_on_diet === 1
+        })) 
+
+        return reply.send({ Meals: transformedMeal })
     })
 
     app.get('/:id', async (request, reply) => {
@@ -120,5 +126,27 @@ export async function mealsRoutes(app: FastifyInstance) {
         return reply.send({ updated_meal: updatedMeal })
     })
 
-    
+    app.delete('/:id', async (request, reply) => {
+        const paramsSchema = z.object({
+            id: z.uuid()
+        })
+
+
+        const { id } = paramsSchema.parse(request.params)
+
+        const userId = request.user?.id
+
+        if (!userId) {
+            return reply.status(500).send({ message: 'User ID not found in request' })
+        }
+
+
+        await knex('meals')
+            .delete()
+            .where({ id: id, user_id: userId })
+
+        
+
+        return reply.send({ message: "Successfully deleted" }).status(201)
+    })
 }
