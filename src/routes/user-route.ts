@@ -30,9 +30,9 @@ export async function userRoutes(app: FastifyInstance) {
             password_hash: hashedPassword,
         }).returning('*')
 
-        const { password_hash: _, ...userWithoutPassword } = newUser
+        const { password_hash: _, ...user } = newUser
 
-        return reply.status(201).send({ message: 'User created', newUser })
+        return reply.status(201).send({ message: 'User created', user })
     })
 
     app.get('/metrics', { preHandler: ensureAuthenticated }, async (request, reply) => {
@@ -51,11 +51,13 @@ export async function userRoutes(app: FastifyInstance) {
 
         const onDietMealsResult = await knex('meals')
             .where('user_id', userId)
+            .andWhere('is_on_diet', 1)
             .count('id', { as: 'onDietMeals' })
             .first()
 
         const notOnDietMealsResult = await knex('meals')
             .where('user_id', userId)
+            .andWhere('is_on_diet', 0)
             .count('id', { as: 'notOnDietMeals' })
             .first()
 

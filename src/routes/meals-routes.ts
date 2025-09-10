@@ -32,7 +32,9 @@ export async function mealsRoutes(app: FastifyInstance) {
             return reply.status(500).send({ message: 'User ID not found in request.' })
         }
 
-        const newMeal = await knex('meals').insert({
+
+
+        const [newMeal] = await knex('meals').insert({
             id: crypto.randomUUID(),
             user_id: userId,
             name,
@@ -41,7 +43,10 @@ export async function mealsRoutes(app: FastifyInstance) {
             is_on_diet
         }).returning('*')
 
-        return reply.status(201).send({ message: 'New meal created', meal: newMeal })
+        const transformedNewMeal = { ...newMeal, is_on_diet: newMeal.is_on_diet === 1 }
+        const { user_id: _, ...mealWithoutUserId } = transformedNewMeal
+
+        return reply.status(201).send({ message: 'New meal created', meal: mealWithoutUserId })
     })
 
     app.get('/', async (request, reply) => {
@@ -52,12 +57,12 @@ export async function mealsRoutes(app: FastifyInstance) {
         }
 
         const meals = await knex('meals')
-        .select('*').where({ user_id: userId })
+            .select('*').where({ user_id: userId })
 
         const transformedMeal = meals.map(meal => ({
             ...meal,
             is_on_diet: meal.is_on_diet === 1
-        })) 
+        }))
 
         return reply.send({ Meals: transformedMeal })
     })
@@ -145,7 +150,7 @@ export async function mealsRoutes(app: FastifyInstance) {
             .delete()
             .where({ id: id, user_id: userId })
 
-        
+
 
         return reply.send({ message: "Successfully deleted" }).status(201)
     })

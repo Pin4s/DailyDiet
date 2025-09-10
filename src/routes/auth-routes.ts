@@ -15,19 +15,19 @@ export async function authRoutes(app: FastifyInstance) {
 
         const { email, password } = bodySchema.parse(request.body)
 
-        const user = await knex('users').where({ email }).first()
+        const authUser = await knex('users').where({ email }).first()
 
-        if (!user) {
+        if (!authUser) {
             return reply.status(401).send({ message: 'Invalid credentials.' })
         }
 
-        const isPasswordCorrect = await bcrypt.compare(password, user.password_hash)
+        const isPasswordCorrect = await bcrypt.compare(password, authUser.password_hash)
 
         if (!isPasswordCorrect) {
             return reply.status(401).send({ message: 'Invalid credentials.' })
         }
 
-        const { password_hash: _, ...userWithoutPassword } = user
+        const { password_hash: _, ...user } = authUser
 
         const token = sign({
             name: user.name,
@@ -37,6 +37,6 @@ export async function authRoutes(app: FastifyInstance) {
             expiresIn: '3d'
         })
 
-        return reply.send({ token, user: userWithoutPassword })
+        return reply.send({ token, user: user })
     })
 }
