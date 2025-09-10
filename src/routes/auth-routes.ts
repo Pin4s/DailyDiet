@@ -27,7 +27,7 @@ export async function authRoutes(app: FastifyInstance) {
             return reply.status(401).send({ message: 'Invalid credentials.' })
         }
 
-        const { password: _, ...userWithoutPassword } = user
+        const { password_hash: _, ...userWithoutPassword } = user
 
         const token = sign({
             name: user.name,

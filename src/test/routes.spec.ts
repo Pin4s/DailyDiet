@@ -125,4 +125,12 @@ describe('Meal Routes', () => {
             })
             .expect(401)
     })
+
+    test('should be able to delete a meal', async () => {
+        const token = await createUserAndGetToken()
+        const newMeal = await createMeal(token)
+
+
+        console.log(newMeal)
+    })
 })
